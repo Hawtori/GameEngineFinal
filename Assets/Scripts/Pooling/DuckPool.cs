@@ -20,6 +20,7 @@ public class DuckPool : MonoBehaviour
 
     private void Start()
     {
+        ducks = new Queue<GameObject>();
         for(int i = 0; i < numberOfDucks; i++)
         {
             GameObject d = Instantiate(duckPrefab, Vector3.zero, Quaternion.identity, transform);

@@ -23,16 +23,22 @@ public class DuckMovement : MonoBehaviour
     private void Update()
     {
         Vector2 target = new Vector2(destination.x - transform.position.x, destination.y - transform.position.y);
-        rb.velocity = target.normalized * ScoreManager.instance.GetRound();
+        rb.velocity = target.normalized * ScoreManager.instance.GetRound() * 1.15f;
+
+        if(Vector2.Distance(destination, transform.position) < 0.1f)
+        {
+            ScoreManager.instance.currentDuck = gameObject;
+            ScoreManager.instance.MissedDuck();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) collision.GetComponent<Player>().canShoot = true;
+        if (collision.CompareTag("Player")) { collision.GetComponent<Player>().canShoot = true; ScoreManager.instance.currentDuck = this.gameObject; }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) collision.GetComponent<Player>().canShoot = false;
+        if (collision.CompareTag("Player")) { collision.GetComponent<Player>().canShoot = false; ScoreManager.instance.currentDuck = null; }
     }
 }

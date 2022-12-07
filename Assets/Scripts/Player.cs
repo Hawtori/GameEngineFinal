@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
         GetInputs();
         if(canShoot && Input.GetKeyDown(KeyCode.Space))
         {
-            //return enemy to pool
             ScoreManager.instance.HitDuck();
         }
     }
