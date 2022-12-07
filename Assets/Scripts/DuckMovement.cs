@@ -23,7 +23,7 @@ public class DuckMovement : MonoBehaviour
     private void Update()
     {
         Vector2 target = new Vector2(destination.x - transform.position.x, destination.y - transform.position.y);
-        rb.velocity = target.normalized * ScoreManager.instance.GetRound() * 5f;
+        rb.velocity = target.normalized * ScoreManager.instance.GetRound() * 1.15f;
 
         if(Vector2.Distance(destination, transform.position) < Random.Range(0.2f, 1f))
         {
