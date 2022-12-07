@@ -26,6 +26,8 @@ public class ScoreManager : MonoBehaviour
 
     private bool canInvoke = true;
 
+    public bool alreadyInverted = false;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -46,7 +48,8 @@ public class ScoreManager : MonoBehaviour
         if (totalDucks == 26) SceneManager.LoadScene(2);
         else if (round == 4) SceneManager.LoadScene(3);
 
-
+        if (ducksMissed % 2 == 0 && !alreadyInverted) alreadyInverted = true;
+        if (ducksMissed % 2 != 0 ) alreadyInverted = false;
     }
 
     public int GetDucksMissed() => ducksMissed;
@@ -68,6 +71,7 @@ public class ScoreManager : MonoBehaviour
 
     public void HitDuck()
     {
+        ducksMissed = 0;
         totalDucks++;
         ducksHit++;
         DuckPool.instance.ReturnDuck(currentDuck);

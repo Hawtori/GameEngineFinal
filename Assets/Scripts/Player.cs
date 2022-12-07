@@ -16,8 +16,6 @@ public class Player : MonoBehaviour
 
     private bool invert = true;
 
-    private bool alreadyInverted = false;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,12 +32,11 @@ public class Player : MonoBehaviour
             ScoreManager.instance.HitDuck();
         }
 
-        if (!alreadyInverted && ScoreManager.instance.GetDucksMissed() % 2 == 0)
+        if (!ScoreManager.instance.alreadyInverted && ScoreManager.instance.GetDucksMissed() % 2 == 0)
         {
-            alreadyInverted = true;
             invert = !invert;
         }
-        if (ScoreManager.instance.GetDucksMissed() % 2 != 0) alreadyInverted = false;
+        //if (ScoreManager.instance.GetDucksMissed() % 2 != 0) alreadyInverted = false;
         
     }
 
