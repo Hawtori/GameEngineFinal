@@ -23,9 +23,9 @@ public class DuckMovement : MonoBehaviour
     private void Update()
     {
         Vector2 target = new Vector2(destination.x - transform.position.x, destination.y - transform.position.y);
-        rb.velocity = target.normalized * ScoreManager.instance.GetRound() * 1.15f;
+        rb.velocity = target.normalized * ScoreManager.instance.GetRound() * 5f;
 
-        if(Vector2.Distance(destination, transform.position) < 0.1f)
+        if(Vector2.Distance(destination, transform.position) < Random.Range(0.2f, 1f))
         {
             ScoreManager.instance.currentDuck = gameObject;
             ScoreManager.instance.MissedDuck();

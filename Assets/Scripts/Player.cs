@@ -11,9 +11,19 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     private Vector2 movement;
 
+    private Inverted iControl;
+    private Normal nControl;
+
+    private bool invert = true;
+
+    private bool alreadyInverted = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        iControl = new Inverted();
+        nControl = new Normal();
     }
 
     private void Update()
@@ -23,6 +33,14 @@ public class Player : MonoBehaviour
         {
             ScoreManager.instance.HitDuck();
         }
+
+        if (!alreadyInverted && ScoreManager.instance.GetDucksMissed() % 2 == 0)
+        {
+            alreadyInverted = true;
+            invert = !invert;
+        }
+        if (ScoreManager.instance.GetDucksMissed() % 2 != 0) alreadyInverted = false;
+        
     }
 
     private void FixedUpdate()
@@ -32,8 +50,9 @@ public class Player : MonoBehaviour
 
     private void GetInputs()
     {
-        movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
+
+        movement.y = (invert ? iControl.Control() : nControl.Control());
+        movement.x = Input.GetAxisRaw("Horizontal");
     }
 
     private void MoveAim()

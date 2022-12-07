@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour
 
     private int ducksMissed = 0;
 
-    private float timeToSpawn = 5f;
+    private float timeToSpawn = 3f;
 
     private bool canInvoke = true;
 
@@ -43,10 +43,13 @@ public class ScoreManager : MonoBehaviour
 
         if (ducksRemaining == 0 && canInvoke) ResetRound();
 
-        if (totalDucks == 30) SceneManager.LoadScene(2);
+        if (totalDucks == 26) SceneManager.LoadScene(2);
         else if (round == 4) SceneManager.LoadScene(3);
 
+
     }
+
+    public int GetDucksMissed() => ducksMissed;
 
     public void SpawnDuck()
     {
